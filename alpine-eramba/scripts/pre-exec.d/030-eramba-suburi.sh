@@ -32,6 +32,6 @@ EOF
 		else
 			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" $HTACCESS
 		fi
-	end
+	done
 fi
 
