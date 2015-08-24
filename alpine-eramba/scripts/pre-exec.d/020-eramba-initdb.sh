@@ -33,6 +33,7 @@ do
 done
 }
 
+DBEMPTY=0
 check4mysql () {
 	echo "[i] Checking if database is empty..."
 	LISTTABLES=`(mysql -B -h db -u $DB_ENV_MYSQL_USER $DBPWOPT -e "SHOW TABLES;" $DB_ENV_MYSQL_DATABASE )`
@@ -41,17 +42,16 @@ check4mysql () {
 		echo "Tables: $NUMTABLES"
 		if [ "$NUMTABLES" = "1" ]; then
 			echo "[i] Looks like database is empty!"			
-			return 1
+			DBEMPTY=1
 		fi
 	else
 		echo "[i] Error connecting to database. Exiting"
 		exit 1	
 	fi
-	return 0
 }
 		
 wait4mysql
-DBEMPTY=$( check4mysql )
+check4mysql
 
 if [ -f "$ERAMBADBCONF" ]; then
 	echo "[i] Found database configuration. Not touching it!"
