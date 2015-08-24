@@ -23,23 +23,15 @@ EOF
 		sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/localhost/htdocs"#g' /etc/apache2/httpd.conf
 	fi
 
-	grep RewriteBase /app/.htaccess 
-	if [ "$?" != "0" ]; then
-		sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}#gi" /app/.htaccess
-	else
-		sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" /app/.htaccess
-	fi
-	grep RewriteBase /app/app/.htaccess
-	if [ "$?" != "0" ]; then
-		sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}#gi" /app/app/.htaccess
-	else
-		sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" /app/app/.htaccess
-	fi
-	grep RewriteBase /app/app/webroot/.htaccess
-	if [ "$?" != "0" ]; then
-		sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}#gi" /app/app/webroot/.htaccess
-	else
-		sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" /app/app/webroot/.htaccess
-	fi
+	for HTACCESS in /app/.htaccess /app/app/.htaccess /app/app/webroot/.htaccess
+	do
+		echo "[i] Configuring $HTACCESS"
+		grep RewriteBase $HTACCESS
+		if [ "$?" != "0" ]; then
+			sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}#gi" $HTACCESS
+		else
+			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" $HTACCESS
+		fi
+	end
 fi
 
