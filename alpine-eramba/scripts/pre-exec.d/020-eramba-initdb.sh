@@ -39,7 +39,7 @@ check4mysql () {
 	LISTTABLES=`(mysql -B -h db -u $DB_ENV_MYSQL_USER $DBPWOPT -e "SHOW TABLES;" $DB_ENV_MYSQL_DATABASE )`
 	if [ "$?" = "0" ]; then
 		NUMTABLES=`( echo "$LISTTABLES" | wc -l )`
-		echo "Tables: $NUMTABLES"
+		# echo "[i] Tables: $NUMTABLES"
 		if [ "$NUMTABLES" = "1" ]; then
 			echo "[i] Looks like database is empty!"			
 			DBEMPTY=1
