@@ -12,5 +12,5 @@ mv /app/eramba_v2/.htaccess /app/ && \
 rm -rf /app/eramba_v2/ && \
 echo "Success"
 
-ADD scripts/eramba-initdb.sh /scripts/pre-exec.d/eramba-initdb.sh 
+ADD scripts/ /scripts
 
