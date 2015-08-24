@@ -12,5 +12,7 @@ mv /app/eramba_v2/.htaccess /app/ && \
 rm -rf /app/eramba_v2/ && \
 echo "Success"
 
+VOLUME ["/app/app/tmp/logs","/app/app/webroot/files","/var/log"]
+
 ADD scripts/ /scripts
 
