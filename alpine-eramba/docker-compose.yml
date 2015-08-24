@@ -1,0 +1,15 @@
+db:
+  image: k0st/alpine-mariadb
+  volumes: 
+  - /data/work/erambadb:/var/lib/mysql
+  environment:
+  - MYSQL_DATABASE=erambadb
+  - MYSQL_USER=erambadb
+  - MYSQL_PASSWORD=erambapass
+
+web:
+  image: k0st/alpine-eramba
+  ports:
+   - "80:10080"
+  links:
+   - db
