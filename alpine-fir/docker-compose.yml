@@ -1,0 +1,15 @@
+db:
+  image: k0st/alpine-postgres
+#  volumes: 
+#  - /data/mydb:/var/lib/postgresql/data
+  environment:
+  - POSTGRES_DB=fir
+  - POSTGRES_USER=fir
+  - POSTGRES_PASSWORD=firpass
+
+web:
+  image: k0st/alpine-fir
+  ports:
+   - "10080:80"
+  links:
+   - db

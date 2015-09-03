@@ -1,0 +1,15 @@
+db:
+  image: k0st/alpine-mariadb
+#  volumes: 
+#  - /data/mydb:/var/lib/mysql
+  environment:
+  - MYSQL_DATABASE=fir
+  - MYSQL_USER=fir
+  - MYSQL_PASSWORD=firpass
+
+web:
+  image: k0st/alpine-fir
+  ports:
+   - "10080:80"
+  links:
+   - db
