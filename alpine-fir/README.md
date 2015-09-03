@@ -1,6 +1,6 @@
 # k0st/alpine-fir
 
-FIR based on Alpine
+Fast Incident Response (FIR) based on Alpine
 
 Image is based on the [gliderlabs/alpine](https://registry.hub.docker.com/u/gliderlabs/alpine/) base image
 
