@@ -9,10 +9,16 @@ tar -xvz -C /app -f /tmp/eramba_$VERSION_ERAMBA.tgz && \
 rm -f /tmp/eramba_$VERSION_ERAMBA.tgz && \
 mv /app/eramba_v2/* /app/ && \
 mv /app/eramba_v2/.htaccess /app/ && \
+mkdir /app/app/tmp/cache/persistent && \
+mkdir /app/app/tmp/cache/models && \
+mkdir /config && \
+chown -R apache:apache /app && \
+mv /app/app/Config /config/Config && \
 rm -rf /app/eramba_v2/ && \
 echo "Success"
 
 # VOLUME ["/app/app/tmp/logs","/app/app/webroot/files","/var/log"]
+VOLUME ["/app/app/Config","/app/app/tmp/logs","/app/app/webroot/files","/var/log"]
 
 ADD scripts/ /scripts
 

@@ -2,10 +2,20 @@
 
 # set -x
 
+if [ -f "/app/app/Config/eramba.configured" ]; then
+        exit 0
+fi
+
+ERAMBASUBCONF=/app/app/Config/eramba-suburi.configured
+
+if [ -f "$ERAMBASUBCONF" ]; then
+	echo "[i] SubURI already configured"
+else
+	echo "[i] Configuring SubURI"
 if [ "$SUBURI" == "" ]; then
 	echo "[i] Using root (/) URI"
 else
-	echo "[i] Using suburi: $SUBURI"
+	echo "[i] Using SubURI: $SUBURI"
 	cat << EOF > /etc/apache2/conf.d/eramba.conf
 Alias $SUBURI "/app/"
 
@@ -33,5 +43,7 @@ EOF
 			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" $HTACCESS
 		fi
 	done
+fi
+	touch "$ERAMBASUBCONF"
 fi
 

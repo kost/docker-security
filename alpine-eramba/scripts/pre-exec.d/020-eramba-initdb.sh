@@ -53,6 +53,18 @@ check4mysql () {
 wait4mysql
 check4mysql
 
+if [ -f "/app/app/Config/eramba.configured" ]; then
+	exit 0
+fi
+
+if [ -f "/app/app/Config/constants.php" ]; then
+	echo "[i] initial configuration found"
+else
+	echo "[i] initial configuration not found, copying it"
+	cp -a /config/Config /app/app/
+fi
+
+
 if [ -f "$ERAMBADBCONF" ]; then
 	echo "[i] Found database configuration. Not touching it!"
 else
