@@ -17,7 +17,7 @@ if [ "$SUBURI" == "" ]; then
 else
 	echo "[i] Using SubURI: $SUBURI"
 	cat << EOF > /etc/apache2/conf.d/eramba.conf
-Alias $SUBURI "/app/"
+Alias $SUBURI/ "/app/"
 
 <Directory "/app">
     Options FollowSymLinks
@@ -38,9 +38,9 @@ EOF
 		echo "[i] Configuring $HTACCESS"
 		grep RewriteBase $HTACCESS
 		if [ "$?" != "0" ]; then
-			sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}#gi" $HTACCESS
+			sed -i "s#RewriteEngine on#RewriteEngine on\n\tRewriteBase ${SUBURI}/#gi" $HTACCESS
 		else
-			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" $HTACCESS
+			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}/#gi" $HTACCESS
 		fi
 	done
 	
