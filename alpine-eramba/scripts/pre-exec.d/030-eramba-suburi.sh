@@ -43,7 +43,10 @@ EOF
 			sed -i "s#RewriteBase.*#RewriteBase ${SUBURI}#gi" $HTACCESS
 		fi
 	done
-fi
+	
+	# configure suburi
+	echo -e "\nConfigure::write('App.base', '$SUBURI');\n" >> /app/app/Config/core.php
+fi # if [ "$SUBURI" == "" ]; then
 	touch "$ERAMBASUBCONF"
-fi
+fi # if [ -f "$ERAMBASUBCONF" ]; then
 
