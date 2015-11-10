@@ -1,7 +1,7 @@
 FROM k0st/alpine-apache-php
 MAINTAINER kost - https://github.com/kost
 
-ENV VERSION_ERAMBA 204015
+ENV VERSION_ERAMBA 204015_div1
 
 RUN apk --update add php-ctype php-mysql php-pdo_mysql mysql-client && rm -f /var/cache/apk/* && \
 curl https://s3.eu-central-1.amazonaws.com/dlh/eramba/eramba_$VERSION_ERAMBA.tgz -o /tmp/eramba_$VERSION_ERAMBA.tgz && \
