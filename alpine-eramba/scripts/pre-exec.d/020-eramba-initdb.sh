@@ -64,7 +64,7 @@ else
 	cp -a /config/Config /app/app/
 fi
 
-for PERMVOLUMES in /app/app/tmp/logs /app/app/webroot/files /app/app/tmp/cache/persistent /app/app/tmp/cache/models /app/app/tmp/cache/acl
+for PERMVOLUMES in /app/app/tmp/logs /app/app/webroot/files /app/app/tmp/cache /app/app/tmp/cache/persistent /app/app/tmp/cache/models /app/app/tmp/cache/acl
 do
 	if ! [ -d "$PERMVOLUMES" ]; then
 		echo "[i] Creating dir for $PERMVOLUMES"
