@@ -64,6 +64,15 @@ else
 	cp -a /config/Config /app/app/
 fi
 
+for PERMVOLUMES in /app/app/tmp/logs /app/app/webroot/files /app/app/tmp/cache/persistent /app/app/tmp/cache/models /app/app/tmp/cache/acl
+do
+	if ! [ -d "$PERMVOLUMES" ]; then
+		echo "[i] Creating dir for $PERMVOLUMES"
+		mkdir $PERMVOLUMES
+	fi
+	echo "[i] Setting permissions for $PERMVOLUMES"
+	chown apache:apache $PERMVOLUMES
+done
 
 if [ -f "$ERAMBADBCONF" ]; then
 	echo "[i] Found database configuration. Not touching it!"
