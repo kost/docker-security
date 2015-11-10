@@ -45,7 +45,14 @@ EOF
 	done
 	
 	# configure suburi
-	echo -e "\nConfigure::write('App.base', '$SUBURI');\n" >> /app/app/Config/core.php
+	grep "^'App.base'" /app/app/Config/core.php 
+	if [ "$?" != "0" ]; then
+		echo "[i] Replacing App.base"
+		sed -i "s#Configure::write('App.base'.*#Configure::write('App.base', '${SUBURI}')#g" /app/app/Config/core.php
+	else
+		echo "[i] Adding App.base"
+		echo -e "\nConfigure::write('App.base', '$SUBURI');\n" >> /app/app/Config/core.php
+	fi
 fi # if [ "$SUBURI" == "" ]; then
 	touch "$ERAMBASUBCONF"
 fi # if [ -f "$ERAMBASUBCONF" ]; then
